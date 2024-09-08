@@ -41,7 +41,6 @@ export const otpAuth = baseApi.injectEndpoints({
     }),
   }),
 });
-
 export const {
   useSendPhoneNumberMutation,
   useCheckOtpMutation,
