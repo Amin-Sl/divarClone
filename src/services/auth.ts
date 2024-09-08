@@ -2,18 +2,18 @@ import baseApi from "./api";
 
 import { getExpirationTime } from "@/utils/cookie";
 
-import { OTP, SendOtpRes, CheckOtpRes, NewTokenPayload , WhoAmIPayload } from "./types";
+import { OtpRes, SendOtpRes, CheckOtpRes, NewTokenPayload , WhoAmIPayload } from "./types";
 
 export const otpAuth = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    sendPhoneNumber: builder.mutation<OTP, SendOtpRes>({
+    sendPhoneNumber: builder.mutation<OtpRes, SendOtpRes>({
       query: ({ mobile }) => ({
         url: "auth/send-otp",
         method: "POST",
         body: { mobile },
       }),
     }),
-    checkOtp: builder.mutation<CheckOtpRes, OTP>({
+    checkOtp: builder.mutation<CheckOtpRes, OtpRes>({
       query: ({ mobile, code }) => ({
         url: "auth/check-otp",
         method: "POST",

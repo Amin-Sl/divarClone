@@ -2,13 +2,11 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Input, Button, Card } from "@nextui-org/react";
-import { useSendPhoneNumberMutation } from "@/services/auth";
-import { toast, Toaster } from "react-hot-toast"; 
-import { SendOtpFormProps } from "./types";
+import { toast, Toaster } from "react-hot-toast";
 
-type FormValues = {
-  phoneNumber: string;
-};
+import { useSendPhoneNumberMutation } from "@/services/auth";
+
+import { SendOtpFormProps, FormValues } from "./types";
 
 export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
   const {
@@ -20,10 +18,9 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
   const [sendPhoneNumber, { isLoading }] = useSendPhoneNumberMutation();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const { phoneNumber } = data;
     try {
-      await sendPhoneNumber({ mobile: phoneNumber }).unwrap();
-      sessionStorage.setItem("phoneNumber", phoneNumber);
+      await sendPhoneNumber({ mobile: data.phoneNumber }).unwrap();
+      sessionStorage.setItem("phoneNumber", data.phoneNumber);
       onSuccess();
       toast.success("کد تایید ارسال شد.");
     } catch (err) {

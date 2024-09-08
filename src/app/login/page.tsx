@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { SendOtpForm } from "@/components/otpForm";
+import { SendOtpForm } from "@/components/OtpForm";
 import { CheckOtpForm } from "@/components/CheckotpForm";
 
 export default function Page() {

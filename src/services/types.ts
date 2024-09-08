@@ -1,4 +1,4 @@
-export interface OTP {
+export interface OtpRes {
   code: string;
   mobile: string;
 }

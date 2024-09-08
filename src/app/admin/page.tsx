@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { useWhoAmIQuery } from "@/services/auth";
@@ -9,10 +9,10 @@ export default function WhoAmIPage() {
   const { data, error, isLoading } = useWhoAmIQuery();
 
   const { push } = useRouter();
-
+//use  (Use layout effects) instead this 
   useEffect(() => {
     if (data?.role === "USER") {
-      push("./dashboard");
+      push("/dashboard");
     }
   }, [data, error]);
   if (isLoading) return <p>Loading...</p>;

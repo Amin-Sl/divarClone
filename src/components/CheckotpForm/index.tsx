@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Input, Button, Card } from "@nextui-org/react";
 import { toast } from "react-hot-toast";
+
 import { useCheckOtpMutation } from "@/services/auth";
 import { CheckOtpRes } from "@/services/types";
 import { storeTokens } from "@/utils/cookie";
@@ -50,8 +51,7 @@ export const CheckOtpForm = () => {
             fullWidth
             value={otp}
             onChange={handleOtpChange}
-            errorMessage="error"
-          />
+            errorMessage="error"      />
         </div>
         <Button
           type="submit"
