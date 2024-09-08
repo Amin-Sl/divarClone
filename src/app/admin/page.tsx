@@ -11,9 +11,6 @@ export default function WhoAmIPage() {
   const { push } = useRouter();
 
   useEffect(() => {
-    if (data?.role === "ADMIN") {
-      console.log("WhoAmI data:", data.role);
-    }
     if (data?.role === "USER") {
       push("./dashboard");
     }
