@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { useWhoAmIQuery } from "@/services/auth";
 
-const WhoAmIPage = () => {
+export default function WhoAmIPage() {
   const { data, error, isLoading } = useWhoAmIQuery();
 
   const { push } = useRouter();
@@ -19,8 +19,5 @@ const WhoAmIPage = () => {
     }
   }, [data, error]);
   if (isLoading) return <p>Loading...</p>;
-
-  return <div>ADMIN</div>;
-};
-
-export default WhoAmIPage;
+  return <div>{data?.role}</div>;
+}

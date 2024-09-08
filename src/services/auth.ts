@@ -2,25 +2,25 @@ import baseApi from "./api";
 
 import { getExpirationTime } from "@/utils/cookie";
 
-import { OTP, sendOtpRes, checkOtpRes, newToken , whoAmI } from "./types";
+import { OTP, SendOtpRes, CheckOtpRes, NewTokenPayload , WhoAmIPayload } from "./types";
 
 export const otpAuth = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    sendPhoneNumber: builder.mutation<OTP, sendOtpRes>({
+    sendPhoneNumber: builder.mutation<OTP, SendOtpRes>({
       query: ({ mobile }) => ({
         url: "auth/send-otp",
         method: "POST",
         body: { mobile },
       }),
     }),
-    checkOtp: builder.mutation<checkOtpRes, OTP>({
+    checkOtp: builder.mutation<CheckOtpRes, OTP>({
       query: ({ mobile, code }) => ({
         url: "auth/check-otp",
         method: "POST",
         body: { mobile, code },
       }),
     }),
-    NewToken: builder.mutation<newToken, void>({
+    newToken: builder.mutation<NewTokenPayload, void>({
       query: () => {
         const refreshToken = getExpirationTime("refreshToken");
         if (!refreshToken) return { url: "", method: "POST", body: {} };
@@ -31,7 +31,7 @@ export const otpAuth = baseApi.injectEndpoints({
         };
       },
     }),
-    whoAmI: builder.query<whoAmI , void>({
+    whoAmI: builder.query<WhoAmIPayload , void>({
       query: () => {
         return {
           url: "user/whoami",

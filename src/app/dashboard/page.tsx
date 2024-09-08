@@ -1,7 +1,3 @@
-const page = () => {
-  return (
-    <div>dashboard</div>
-  )
+export default function Page() {
+ return( <div>dashBoard</div>)
 }
-
-export default page

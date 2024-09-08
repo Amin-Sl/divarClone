@@ -2,17 +2,21 @@ export interface OTP {
   code: string;
   mobile: string;
 }
-export interface sendOtpRes {
+
+export interface SendOtpRes {
   mobile: string;
 }
-export interface checkOtpRes {
+
+export interface CheckOtpRes {
   accessToken: string;
   refreshToken: string;
 }
-export interface newToken {
+
+export interface NewTokenPayload {
   refreshToken: string;
 }
-export interface whoAmI {
+
+export interface WhoAmIPayload {
   id: string;
   mobile: string;
   role: string;
