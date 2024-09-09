@@ -40,7 +40,7 @@ export const CheckOtpForm = () => {
   return (
     <Card className="mx-auto mt-24 max-w-md rounded-lg border border-gray-300 p-8">
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-5">
+        <div className="mb-5 flex flex-col gap-5">
           <h2 className="text-lg font-medium">تأیید شماره موبایل</h2>
           <h2 className="text-sm text-gray-600">
             لطفاً کد تأیید دریافتی را وارد کنید.

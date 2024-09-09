@@ -16,6 +16,8 @@ export default function WhoAmIPage() {
       push("/dashboard");
     }
   }, [data, error]);
+
   if (isLoading) return <p>Loading...</p>;
+
   return <div>{data?.role}</div>;
 }

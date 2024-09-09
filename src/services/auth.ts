@@ -11,7 +11,7 @@ import {
 
 export const otpAuth = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    sendPhoneNumber: builder.mutation<OtpRes, SendOtpRes>({
+    sendOtp: builder.mutation<OtpRes, SendOtpRes>({
       query: ({ mobile }) => ({
         url: "auth/send-otp",
         method: "POST",
@@ -46,7 +46,7 @@ export const otpAuth = baseApi.injectEndpoints({
   }),
 });
 export const {
-  useSendPhoneNumberMutation,
+  useSendOtpMutation,
   useCheckOtpMutation,
   useNewTokenMutation,
   useWhoAmIQuery,

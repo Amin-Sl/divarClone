@@ -4,7 +4,7 @@ import { Button, Card, Input } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import { useSendPhoneNumberMutation } from "@/services/auth";
+import { useSendOtpMutation } from "@/services/auth";
 
 import { FormValues, SendOtpFormProps } from "./types";
 
@@ -15,7 +15,7 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const [sendPhoneNumber, { isLoading }] = useSendPhoneNumberMutation();
+  const [sendPhoneNumber, { isLoading }] = useSendOtpMutation();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
@@ -32,7 +32,7 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
     <>
       <Card className="mx-auto mt-24 max-w-md rounded-lg border border-gray-300 p-8">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-5">
+          <div className="mb-5 flex flex-col gap-5">
             <h2 className="text-lg font-medium">ورود به حساب کاربری</h2>
             <h2 className="text-sm text-gray-600">
               برای استفاده از امکانات دیوار، لطفاً شمارهٔ موبایل خود را وارد
