@@ -10,7 +10,6 @@ export default function WhoAmIPage() {
   const { data, error, isLoading } = useWhoAmIQuery();
 
   const { push } = useRouter();
-  //use  (Use layout effects) instead this
   useEffect(() => {
     if (data?.role === "USER") {
       push("/dashboard");
