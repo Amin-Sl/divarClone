@@ -16,6 +16,7 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
   } = useForm<FormValues>();
 
   const [sendPhoneNumber, { isLoading }] = useSendOtpMutation();
+
   const onSubmit: SubmitHandler<FormValues> = async ({ phoneNumber }) => {
     try {
       await sendPhoneNumber({ mobile: phoneNumber }).unwrap();

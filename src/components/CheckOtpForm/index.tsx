@@ -3,27 +3,28 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 import { useCheckOtpMutation } from "@/services/auth";
-import { CheckOtpRes } from "@/services/types";
-import { setToken } from "@/utils/cookie";
+import { setTokens } from "@/utils/cookie";
 
+import { OtpType } from "./type";
 export const CheckOtpForm = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<{ otp: string }>();
-  const [checkOtp, { isLoading, isSuccess, error }] = useCheckOtpMutation();
+  } = useForm<OtpType>();
+
+  const [checkOtp, { isLoading }] = useCheckOtpMutation();
 
   const phoneNumber = sessionStorage.getItem("phoneNumber") || "";
 
-  const onSubmit = async (data: { otp: string }) => {
+  const onSubmit = async ({ otp }: OtpType) => {
     try {
-      const { accessToken, refreshToken }: CheckOtpRes = await checkOtp({
+      const { accessToken, refreshToken } = await checkOtp({
         mobile: phoneNumber,
-        code: data.otp,
+        code: otp,
       }).unwrap();
 
-      setToken(accessToken, refreshToken);
+      setTokens(accessToken, refreshToken);
       toast.success("کد تأیید صحیح است.");
     } catch (err) {
       toast.error("خطایی در بررسی کد تأیید رخ داد.");
@@ -63,9 +64,7 @@ export const CheckOtpForm = () => {
           disabled={isLoading}
         >
           {isLoading ? "در حال بررسی..." : "تأیید کد"}
-        </Button>
-        {isSuccess && <p className="mt-3 text-green-600">کد تأیید صحیح است.</p>}
-        {error && <p className="mt-3 text-red-600">خطایی رخ داد:</p>}
+        </Button>{" "}
       </form>
     </Card>
   );

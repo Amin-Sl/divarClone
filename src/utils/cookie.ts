@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
 import { toast } from "react-hot-toast";
 
-export const setToken = (accessToken: string, refreshToken: string) => {
+export const setTokens = (accessToken: string, refreshToken: string) => {
   const cookieOptions = {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict" as const,

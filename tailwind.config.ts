@@ -9,9 +9,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        vazir: ["Vazir", "sans-serif"],
-      },
       colors: {
         danger: "#D96876",
       },

@@ -8,6 +8,7 @@ import {
   SendOtpPayload,
   WhoAmIRes,
 } from "./types";
+
 export const otpAuth = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     sendOtp: builder.mutation<OtpType, SendOtpPayload>({
@@ -43,6 +44,7 @@ export const otpAuth = baseApi.injectEndpoints({
     }),
   }),
 });
+
 export const {
   useSendOtpMutation,
   useCheckOtpMutation,

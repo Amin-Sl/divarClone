@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
 import { Provider } from "@/components/layouts/Provider";
-import { myFont } from "@/utils/font";
+import { vazir } from "@/utils/font";
 
 import "@/styles/index.css";
 
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={myFont.className}>
+      <body className={vazir.className}>
         <Toaster />
         <Provider>{children}</Provider>
       </body>
