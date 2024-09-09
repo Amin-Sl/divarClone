@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { SendOtpForm } from "@/components/OtpForm";
 import { CheckOtpForm } from "@/components/CheckotpForm";
+import { SendOtpForm } from "@/components/OtpForm";
 
 export default function Page() {
   const [isOtpFormVisible, setIsOtpFormVisible] = useState<boolean>(false);

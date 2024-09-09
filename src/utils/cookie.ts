@@ -12,9 +12,12 @@ export const storeTokens = (accessToken: string, refreshToken: string) => {
 
   if (accessTokenExpiration) {
     const expiresInDays = Math.ceil(
-      (accessTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      (accessTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
     );
-    Cookies.set("accessToken", accessToken, { ...cookieOptions, expires: expiresInDays });
+    Cookies.set("accessToken", accessToken, {
+      ...cookieOptions,
+      expires: expiresInDays,
+    });
     console.log("Access Token Expiration:", accessTokenExpiration);
   } else {
     console.error("Failed to determine access token expiration.");
@@ -22,9 +25,12 @@ export const storeTokens = (accessToken: string, refreshToken: string) => {
 
   if (refreshTokenExpiration) {
     const expiresInDays = Math.ceil(
-      (refreshTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      (refreshTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
     );
-    Cookies.set("refreshToken", refreshToken, { ...cookieOptions, expires: expiresInDays });
+    Cookies.set("refreshToken", refreshToken, {
+      ...cookieOptions,
+      expires: expiresInDays,
+    });
     console.log("Refresh Token Expiration:", refreshTokenExpiration);
   } else {
     console.error("Failed to determine refresh token expiration.");
@@ -37,7 +43,7 @@ export const getExpirationTime = (token: string): Date | null => {
   try {
     const decoded = jwt.decode(token) as { exp: number } | null;
     if (decoded?.exp) {
-      return new Date(decoded.exp * 1000);  
+      return new Date(decoded.exp * 1000);
     } else {
       console.error("Invalid token or no expiration time found.");
       return null;

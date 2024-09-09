@@ -1,8 +1,13 @@
-import baseApi from "./api";
-
 import { getExpirationTime } from "@/utils/cookie";
 
-import { OtpRes, SendOtpRes, CheckOtpRes, NewTokenPayload , WhoAmIPayload } from "./types";
+import baseApi from "./api";
+import {
+  CheckOtpRes,
+  NewTokenPayload,
+  OtpRes,
+  SendOtpRes,
+  WhoAmIPayload,
+} from "./types";
 
 export const otpAuth = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -23,7 +28,6 @@ export const otpAuth = baseApi.injectEndpoints({
     newToken: builder.mutation<NewTokenPayload, void>({
       query: () => {
         const refreshToken = getExpirationTime("refreshToken");
-        if (!refreshToken) return { url: "", method: "POST", body: {} };
         return {
           url: "auth/check-refresh-token",
           method: "POST",
@@ -31,7 +35,7 @@ export const otpAuth = baseApi.injectEndpoints({
         };
       },
     }),
-    whoAmI: builder.query<WhoAmIPayload , void>({
+    whoAmI: builder.query<WhoAmIPayload, void>({
       query: () => {
         return {
           url: "user/whoami",

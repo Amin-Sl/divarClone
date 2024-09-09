@@ -1,5 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { Input, Button, Card } from "@nextui-org/react";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+import { Button, Card, Input } from "@nextui-org/react";
 import { toast } from "react-hot-toast";
 
 import { useCheckOtpMutation } from "@/services/auth";
@@ -39,7 +40,7 @@ export const CheckOtpForm = () => {
   return (
     <Card className="mx-auto mt-24 max-w-md rounded-lg border border-gray-300 p-8">
       <form onSubmit={handleSubmit}>
-        <div className="mb-5">
+        <div className="flex flex-col gap-5">
           <h2 className="text-lg font-medium">تأیید شماره موبایل</h2>
           <h2 className="text-sm text-gray-600">
             لطفاً کد تأیید دریافتی را وارد کنید.
@@ -51,7 +52,8 @@ export const CheckOtpForm = () => {
             fullWidth
             value={otp}
             onChange={handleOtpChange}
-            errorMessage="error"      />
+            errorMessage="error"
+          />
         </div>
         <Button
           type="submit"
@@ -61,9 +63,7 @@ export const CheckOtpForm = () => {
         >
           تأیید کد
         </Button>
-        {isSuccess && (
-          <p className="mt-3 text-green-600">کد تأیید صحیح است.</p>
-        )}
+        {isSuccess && <p className="mt-3 text-green-600">کد تأیید صحیح است.</p>}
         {error && <p className="mt-3 text-red-600">خطایی رخ داد:</p>}
       </form>
     </Card>
