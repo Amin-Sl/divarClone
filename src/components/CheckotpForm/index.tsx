@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 
 import { useCheckOtpMutation } from "@/services/auth";
 import { CheckOtpRes } from "@/services/types";
-import { setCoockie } from "@/utils/cookie";
+import { setToken } from "@/utils/cookie";
 
 export const CheckOtpForm = () => {
   const {
@@ -23,7 +23,7 @@ export const CheckOtpForm = () => {
         code: data.otp,
       }).unwrap();
 
-      setCoockie(accessToken, refreshToken);
+      setToken(accessToken, refreshToken);
       toast.success("کد تأیید صحیح است.");
     } catch (err) {
       toast.error("خطایی در بررسی کد تأیید رخ داد.");
