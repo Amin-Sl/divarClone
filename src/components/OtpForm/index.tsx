@@ -16,11 +16,10 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
   } = useForm<FormValues>();
 
   const [sendPhoneNumber, { isLoading }] = useSendOtpMutation();
-
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async ({ phoneNumber }) => {
     try {
-      await sendPhoneNumber({ mobile: data.phoneNumber }).unwrap();
-      sessionStorage.setItem("phoneNumber", data.phoneNumber);
+      await sendPhoneNumber({ mobile: phoneNumber }).unwrap();
+      sessionStorage.setItem("phoneNumber", phoneNumber);
       onSuccess();
       toast.success("کد تایید ارسال شد.");
     } catch (err) {
@@ -57,7 +56,7 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
           <Button
             type="submit"
             className="bg-danger font-thin"
-            disabled={isLoading}
+            {...{ isLoading }}
           >
             {isLoading ? "در حال ارسال..." : "کد تایید"}
           </Button>

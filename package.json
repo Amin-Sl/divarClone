@@ -9,14 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nextui-org/card": "^2.0.33",
     "@nextui-org/react": "^2.4.6",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.7.6",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^3.2.2",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "next": "^14.2.5",
     "react": "^18",
     "react-dom": "^18",

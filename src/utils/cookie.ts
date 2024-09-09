@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
+import { toast } from "react-hot-toast";
 
-export const storeTokens = (accessToken: string, refreshToken: string) => {
+export const setCoockie = (accessToken: string, refreshToken: string) => {
   const cookieOptions = {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict" as const,
@@ -18,9 +19,9 @@ export const storeTokens = (accessToken: string, refreshToken: string) => {
       ...cookieOptions,
       expires: expiresInDays,
     });
-    console.log("Access Token Expiration:", accessTokenExpiration);
+    toast.success("Access Token stored successfully");
   } else {
-    console.error("Failed to determine access token expiration.");
+    toast.error("Failed to determine access token expiration");
   }
 
   if (refreshTokenExpiration) {
@@ -31,13 +32,14 @@ export const storeTokens = (accessToken: string, refreshToken: string) => {
       ...cookieOptions,
       expires: expiresInDays,
     });
-    console.log("Refresh Token Expiration:", refreshTokenExpiration);
+    toast.success("Refresh Token stored successfully");
   } else {
-    console.error("Failed to determine refresh token expiration.");
+    toast.error("Failed to determine refresh token expiration");
   }
 };
 
 export const getAccessToken = Cookies.get("accessToken");
+export const getRefreshToken = Cookies.get("refreshToken");
 
 export const getExpirationTime = (token: string): Date | null => {
   try {
@@ -45,11 +47,11 @@ export const getExpirationTime = (token: string): Date | null => {
     if (decoded?.exp) {
       return new Date(decoded.exp * 1000);
     } else {
-      console.error("Invalid token or no expiration time found.");
+      toast.error("Invalid token or no expiration time found");
       return null;
     }
   } catch (err) {
-    console.error("Error decoding token:", err);
+    toast.error("Error decoding token");
     return null;
   }
 };

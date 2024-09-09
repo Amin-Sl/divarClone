@@ -1,9 +1,9 @@
-export interface OtpRes {
+export interface OtpType {
   code: string;
   mobile: string;
 }
 
-export interface SendOtpRes {
+export interface SendOtpPayload {
   mobile: string;
 }
 
@@ -12,11 +12,11 @@ export interface CheckOtpRes {
   refreshToken: string;
 }
 
-export interface NewTokenPayload {
+export interface NewTokenRes {
   refreshToken: string;
 }
 
-export interface WhoAmIPayload {
+export interface WhoAmIRes {
   id: string;
   mobile: string;
   role: string;
