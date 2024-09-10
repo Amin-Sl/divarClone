@@ -4,7 +4,7 @@ import { Button, Card, Input } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import { useSendOtpMutation } from "@/services/auth";
+import { useSendOtpMutation } from "@/services/authApi";
 
 import { FormValues, SendOtpFormProps } from "./types";
 
@@ -38,26 +38,30 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
               برای استفاده از امکانات دیوار، لطفاً شمارهٔ موبایل خود را وارد
               کنید. کد تأیید به این شماره پیامک خواهد شد.
             </h2>
-            <Input
-              placeholder="شماره موبایل"
-              maxLength={11}
-              minLength={11}
-              fullWidth
-              {...register("phoneNumber", {
-                required: "وارد کردن شماره موبایل الزامی است.",
-                pattern: {
-                  value: /^09\d{9}$/,
-                  message:
-                    "شماره موبایل باید با 09 شروع شود و 11 رقم داشته باشد.",
-                },
-              })}
-              errorMessage={errors.phoneNumber?.message}
-            />
+            <div>
+              <Input
+                placeholder="شماره موبایل"
+                maxLength={11}
+                minLength={11}
+                fullWidth
+                classNames={{ input: "placeholder:!text-right" }}
+                dir="ltr"
+                {...register("phoneNumber", {
+                  required: "وارد کردن شماره موبایل الزامی است.",
+                  pattern: {
+                    value: /^09\d{9}$/,
+                    message: "فرمت شماره موبایل صحیح نیست",
+                  },
+                })}
+                isInvalid={!!errors.phoneNumber}
+                errorMessage={errors.phoneNumber?.message}
+              />
+            </div>
           </div>
           <Button
             type="submit"
             className="bg-danger font-thin"
-            {...{ isLoading }}
+            isLoading={isLoading}
           >
             {isLoading ? "در حال ارسال..." : "کد تایید"}
           </Button>

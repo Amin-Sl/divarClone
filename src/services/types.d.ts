@@ -14,6 +14,7 @@ export interface CheckOtpRes {
 
 export interface NewTokenRes {
   refreshToken: string;
+  accessToken: string;
 }
 
 export interface WhoAmIRes {

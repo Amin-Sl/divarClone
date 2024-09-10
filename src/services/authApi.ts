@@ -1,4 +1,4 @@
-import { getRefreshToken } from "@/utils/cookie";
+import { refreshToken } from "@/utils/cookie";
 
 import baseApi from "./api";
 import {
@@ -9,7 +9,7 @@ import {
   WhoAmIRes,
 } from "./types";
 
-export const otpAuth = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     sendOtp: builder.mutation<OtpType, SendOtpPayload>({
       query: ({ mobile }) => ({
@@ -30,7 +30,7 @@ export const otpAuth = baseApi.injectEndpoints({
         return {
           url: "auth/check-refresh-token",
           method: "POST",
-          body: { getRefreshToken },
+          body: { refreshToken },
         };
       },
     }),
@@ -50,4 +50,4 @@ export const {
   useCheckOtpMutation,
   useNewTokenMutation,
   useWhoAmIQuery,
-} = otpAuth;
+} = authApi;

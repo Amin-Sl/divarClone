@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
-import { toast } from "react-hot-toast";
 
 export const setTokens = (accessToken: string, refreshToken: string) => {
   const cookieOptions = {
@@ -19,9 +18,6 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
       ...cookieOptions,
       expires: expiresInDays,
     });
-    toast.success("Access Token stored successfully");
-  } else {
-    toast.error("Failed to determine access token expiration");
   }
 
   if (refreshTokenExpiration) {
@@ -32,26 +28,20 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
       ...cookieOptions,
       expires: expiresInDays,
     });
-    toast.success("Refresh Token stored successfully");
-  } else {
-    toast.error("Failed to determine refresh token expiration");
   }
 };
 
-export const getAccessToken = Cookies.get("accessToken");
-export const getRefreshToken = Cookies.get("refreshToken");
-
+export const accessToken = Cookies.get("accessToken");
+export const refreshToken = Cookies.get("refreshToken");
 export const getExpirationTime = (token: string): Date | null => {
   try {
     const decoded = jwt.decode(token) as { exp: number } | null;
     if (decoded?.exp) {
       return new Date(decoded.exp * 1000);
     } else {
-      toast.error("Invalid token or no expiration time found");
       return null;
     }
   } catch (err) {
-    toast.error("Error decoding token");
     return null;
   }
 };

@@ -1,17 +1,20 @@
 import { Button, Card, Input } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
-import { useCheckOtpMutation } from "@/services/auth";
+import { useCheckOtpMutation } from "@/services/authApi";
 import { setTokens } from "@/utils/cookie";
 
-import { OtpType } from "./type";
+import { OtpType } from "./types";
 export const CheckOtpForm = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<OtpType>();
+
+  const { push } = useRouter();
 
   const [checkOtp, { isLoading }] = useCheckOtpMutation();
 
@@ -25,9 +28,10 @@ export const CheckOtpForm = () => {
       }).unwrap();
 
       setTokens(accessToken, refreshToken);
-      toast.success("کد تأیید صحیح است.");
+      push("/dashboard");
+      toast.success("ورود موفقیت آمیز بود");
     } catch (err) {
-      toast.error("خطایی در بررسی کد تأیید رخ داد.");
+      toast.error("خطایی در کد تأیید رخ داد.");
     }
   };
 
@@ -44,6 +48,8 @@ export const CheckOtpForm = () => {
             maxLength={5}
             minLength={5}
             fullWidth
+            className=""
+            classNames={{ input: "placeholder:!text-right" }}
             {...register("otp", {
               required: "کد تأیید ضروری است.",
               minLength: {
