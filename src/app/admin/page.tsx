@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 import { useRouter } from "next/navigation";
 import { Oval } from "react-loader-spinner";
 
+import { CategoryForm } from "@/components/CategoryForm";
+import CategoryList from "@/components/CategoryList";
 import { useWhoAmIQuery } from "@/services/authApi";
 import { accessToken } from "@/utils/cookie";
 
@@ -12,7 +14,7 @@ export default function WhoAmIPage() {
   const { data, error, isLoading } = useWhoAmIQuery();
   const { push } = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (data?.role === "USER" || accessToken == null) {
       push("/dashboard");
     }
@@ -35,5 +37,10 @@ export default function WhoAmIPage() {
       </div>
     );
 
-  return <div>{data?.role}</div>;
+  return (
+    <div>
+      <CategoryList />
+      <CategoryForm />
+    </div>
+  );
 }
