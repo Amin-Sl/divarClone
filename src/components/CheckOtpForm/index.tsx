@@ -50,6 +50,7 @@ export const CheckOtpForm = () => {
             fullWidth
             className=""
             classNames={{ input: "placeholder:!text-right" }}
+            dir="ltr"
             {...register("otp", {
               required: "کد تأیید ضروری است.",
               minLength: {

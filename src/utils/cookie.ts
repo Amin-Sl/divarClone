@@ -14,25 +14,27 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
     const expiresInDays = Math.ceil(
       (accessTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
     );
+
     Cookies.set("accessToken", accessToken, {
       ...cookieOptions,
       expires: expiresInDays,
     });
   }
-
   if (refreshTokenExpiration) {
-    const expiresInDays = Math.ceil(
+    const expires = Math.ceil(
       (refreshTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
     );
     Cookies.set("refreshToken", refreshToken, {
       ...cookieOptions,
-      expires: expiresInDays,
+      expires,
     });
   }
 };
 
-export const accessToken = Cookies.get("accessToken");
-export const refreshToken = Cookies.get("refreshToken");
+export const getCookie = (
+  key: "accessToken" | "refreshToken",
+): string | undefined => Cookies.get(key);
+
 export const getExpirationTime = (token: string): Date | null => {
   try {
     const decoded = jwt.decode(token) as { exp: number } | null;
