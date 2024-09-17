@@ -13,20 +13,21 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
   if (accessTokenExpiration) {
     const expiresInDays = Math.ceil(
       (accessTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
+      // Date.now()) / (1000 * 60 * 60 * 24), تبدیل این به یک فانکشن جدا
     );
+
     Cookies.set("accessToken", accessToken, {
       ...cookieOptions,
       expires: expiresInDays,
     });
   }
-
   if (refreshTokenExpiration) {
-    const expiresInDays = Math.ceil(
+    const expires = Math.ceil(
       (refreshTokenExpiration.getTime() - Date.now()) / (1000 * 60 * 60 * 24),
     );
     Cookies.set("refreshToken", refreshToken, {
       ...cookieOptions,
-      expires: expiresInDays,
+      expires,
     });
   }
 };

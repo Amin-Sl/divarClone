@@ -5,14 +5,15 @@ import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Oval } from "react-loader-spinner";
 
-import { CategoryForm } from "@/components/CategoryForm";
-import CategoryList from "@/components/CategoryList";
 import { useWhoAmIQuery } from "@/services/authApi";
-import { accessToken } from "@/utils/cookie";
+import { accessToken, refreshToken } from "@/utils/cookie";
 
 export default function WhoAmIPage() {
-  const { data, error, isLoading } = useWhoAmIQuery();
   const { push } = useRouter();
+
+  const { data, error, isLoading } = useWhoAmIQuery(undefined, {
+    skip: !refreshToken,
+  });
 
   useLayoutEffect(() => {
     if (data?.role === "USER" || accessToken == null) {
@@ -37,10 +38,5 @@ export default function WhoAmIPage() {
       </div>
     );
 
-  return (
-    <div>
-      <CategoryList />
-      <CategoryForm />
-    </div>
-  );
+  return <div>Admin</div>;
 }
