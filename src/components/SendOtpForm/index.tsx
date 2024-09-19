@@ -29,44 +29,42 @@ export const SendOtpForm = ({ onSuccess }: SendOtpFormProps) => {
   };
 
   return (
-    <>
-      <Card className="mx-auto mt-24 max-w-md rounded-lg border border-gray-300 p-8">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-5 flex flex-col gap-5">
-            <h2 className="text-lg font-medium">ورود به حساب کاربری</h2>
-            <h2 className="text-sm text-gray-600">
-              برای استفاده از امکانات دیوار، لطفاً شمارهٔ موبایل خود را وارد
-              کنید. کد تأیید به این شماره پیامک خواهد شد.
-            </h2>
-            <div>
-              <Input
-                placeholder="شماره موبایل"
-                maxLength={11}
-                minLength={11}
-                fullWidth
-                classNames={{ input: "placeholder:!text-right" }}
-                dir="ltr"
-                {...register("phoneNumber", {
-                  required: "وارد کردن شماره موبایل الزامی است.",
-                  pattern: {
-                    value: /^09\d{9}$/,
-                    message: "فرمت شماره موبایل صحیح نیست",
-                  },
-                })}
-                isInvalid={!!errors.phoneNumber}
-                errorMessage={errors.phoneNumber?.message}
-              />
-            </div>
+    <Card className="mx-auto mt-24 max-w-md rounded-lg border border-gray-300 p-8">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-5 flex flex-col gap-5">
+          <h2 className="text-lg font-medium">ورود به حساب کاربری</h2>
+          <h2 className="text-sm text-gray-600">
+            برای استفاده از امکانات دیوار، لطفاً شمارهٔ موبایل خود را وارد کنید.
+            کد تأیید به این شماره پیامک خواهد شد.
+          </h2>
+          <div>
+            <Input
+              placeholder="شماره موبایل"
+              maxLength={11}
+              minLength={11}
+              fullWidth
+              classNames={{ input: "placeholder:!text-right" }}
+              dir="ltr"
+              {...register("phoneNumber", {
+                required: "وارد کردن شماره موبایل الزامی است.",
+                pattern: {
+                  value: /^09\d{9}$/,
+                  message: "فرمت شماره موبایل صحیح نیست",
+                },
+              })}
+              isInvalid={!!errors.phoneNumber}
+              errorMessage={errors.phoneNumber?.message}
+            />
           </div>
-          <Button
-            type="submit"
-            className="bg-danger font-thin"
-            isLoading={isLoading}
-          >
-            {isLoading ? "در حال ارسال..." : "کد تایید"}
-          </Button>
-        </form>
-      </Card>
-    </>
+        </div>
+        <Button
+          type="submit"
+          className="bg-danger font-thin"
+          isLoading={isLoading}
+        >
+          {isLoading ? "در حال ارسال..." : "کد تایید"}
+        </Button>
+      </form>
+    </Card>
   );
 };

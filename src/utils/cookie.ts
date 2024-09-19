@@ -32,8 +32,10 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
   }
 };
 
-export const accessToken = Cookies.get("accessToken");
-export const refreshToken = Cookies.get("refreshToken");
+export const getCookie = (
+  key: "accessToken" | "refreshToken",
+): string | undefined => Cookies.get(key);
+
 export const getExpirationTime = (token: string): Date | null => {
   try {
     const decoded = jwt.decode(token) as { exp: number } | null;

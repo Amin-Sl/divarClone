@@ -1,4 +1,4 @@
-import { refreshToken } from "@/utils/cookie";
+import { getCookie } from "@/utils/cookie";
 
 import baseApi from "./api";
 import {
@@ -29,7 +29,11 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "auth/check-refresh-token",
         method: "POST",
+<<<<<<< HEAD
         body: { refreshToken },
+=======
+        body: { refreshToken: getCookie("refreshToken") },
+>>>>>>> main
       }),
     }),
     whoAmI: builder.query<WhoAmIRes, void>({
