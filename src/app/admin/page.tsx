@@ -12,10 +12,9 @@ export default function WhoAmIPage() {
   const { push } = useRouter();
 
   const accessToken = getCookie("accessToken");
-  const refreshToken = getCookie("refreshToken");
 
   const { data, error, isLoading } = useWhoAmIQuery(undefined, {
-    skip: !refreshToken,
+    skip: !accessToken,
   });
 
   useLayoutEffect(() => {

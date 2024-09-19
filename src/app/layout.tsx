@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
+import { Protected } from "@/components/layouts/Protected";
 import { Provider } from "@/components/layouts/Provider";
-import { Protected } from "@/services/tokenApi";
 import { vazir } from "@/utils/font";
 
 import "@/styles/index.css";

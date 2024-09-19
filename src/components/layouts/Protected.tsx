@@ -12,43 +12,44 @@ export const Protected = ({ children }: { children: ReactNode }) => {
   const refreshToken = getCookie("refreshToken");
 
   useEffect(() => {
-    const tokenApi = async () => {
-      if (refreshToken && !accessToken) {
+    const fetchNewToken = async () => {
+      if (!accessToken && refreshToken) {
         try {
           const response = await newToken().unwrap();
           if (response.accessToken) {
             setTokens(response.accessToken, response.refreshToken);
           }
         } catch (error) {
-          return { error };
+          console.error("Failed to fetch new token", error);
         }
       }
     };
 
+    fetchNewToken();
+  }, [accessToken, refreshToken, newToken]);
+
+  useEffect(() => {
     const interval = setInterval(async () => {
-      if (accessToken) {
-        const expirationTime = getExpirationTime(accessToken);
+      const expirationTime = getExpirationTime("accessToken");
 
-        if (expirationTime) {
-          const timeLeft = (expirationTime.getTime() - Date.now()) / 1000;
+      if (expirationTime) {
+        const timeLeft = (expirationTime.getTime() - Date.now()) / 1000;
 
-          if (timeLeft <= 5) {
-            try {
-              const response = await newToken().unwrap();
-              if (response.accessToken) {
-                setTokens(response.accessToken, response.refreshToken);
-              }
-            } catch (error) {
-              console.error("Failed to refresh token", error);
+        if (timeLeft <= 5) {
+          try {
+            const response = await newToken().unwrap();
+            if (response.accessToken) {
+              setTokens(response.accessToken, response.refreshToken);
             }
+          } catch (error) {
+            console.error("Failed to refresh token", error);
           }
         }
       }
     }, 4000);
 
-    tokenApi();
     return () => clearInterval(interval);
   }, [newToken]);
 
-  return <>{children}</>;
+  return children;
 };

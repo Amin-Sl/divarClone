@@ -7,14 +7,15 @@ import { useCheckOtpMutation } from "@/services/authApi";
 import { setTokens } from "@/utils/cookie";
 
 import { OtpType } from "./types";
+
 export const CheckOtpForm = () => {
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<OtpType>();
-
-  const { push } = useRouter();
 
   const [checkOtp, { isLoading }] = useCheckOtpMutation();
 
@@ -68,7 +69,7 @@ export const CheckOtpForm = () => {
         <Button
           type="submit"
           className="bg-danger font-thin"
-          disabled={isLoading}
+          isLoading={isLoading}
         >
           {isLoading ? "در حال بررسی..." : "تأیید کد"}
         </Button>{" "}

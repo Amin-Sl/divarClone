@@ -9,8 +9,6 @@ import {
   WhoAmIRes,
 } from "./types";
 
-const refreshToken = getCookie("refreshToken");
-
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     sendOtp: builder.mutation<OtpType, SendOtpPayload>({
@@ -31,7 +29,7 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "auth/check-refresh-token",
         method: "POST",
-        body: { refreshToken },
+        body: { refreshToken: getCookie("refreshToken") },
       }),
     }),
     whoAmI: builder.query<WhoAmIRes, void>({
