@@ -29,11 +29,7 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "auth/check-refresh-token",
         method: "POST",
-<<<<<<< HEAD
-        body: { refreshToken },
-=======
         body: { refreshToken: getCookie("refreshToken") },
->>>>>>> main
       }),
     }),
     whoAmI: builder.query<WhoAmIRes, void>({

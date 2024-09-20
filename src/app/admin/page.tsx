@@ -5,25 +5,18 @@ import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Oval } from "react-loader-spinner";
 
+import { CategoryForm } from "@/components/CategoryForm";
+import CategoryList from "@/components/CategoryList";
 import { useWhoAmIQuery } from "@/services/authApi";
-<<<<<<< HEAD
-import { accessToken, refreshToken } from "@/utils/cookie";
-=======
 import { getCookie } from "@/utils/cookie";
->>>>>>> main
 
 export default function WhoAmIPage() {
   const { push } = useRouter();
 
-<<<<<<< HEAD
-  const { data, error, isLoading } = useWhoAmIQuery(undefined, {
-    skip: !refreshToken,
-=======
   const accessToken = getCookie("accessToken");
 
   const { data, error, isLoading } = useWhoAmIQuery(undefined, {
     skip: !accessToken,
->>>>>>> main
   });
 
   useLayoutEffect(() => {
@@ -49,5 +42,10 @@ export default function WhoAmIPage() {
       </div>
     );
 
-  return <div>Admin</div>;
+  return (
+    <>
+      <CategoryForm />
+      <CategoryList />
+    </>
+  );
 }

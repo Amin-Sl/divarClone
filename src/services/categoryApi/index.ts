@@ -2,7 +2,7 @@ import baseApi from "../api";
 
 import { CategoryList, CategoryRes, DeleteRes } from "./types";
 
-export const category = baseApi.injectEndpoints({
+export const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     postCategory: builder.mutation<void, CategoryRes>({
       query: ({ name, icon, slug }) => ({
@@ -10,18 +10,21 @@ export const category = baseApi.injectEndpoints({
         method: "POST",
         body: { name, icon, slug },
       }),
+      invalidatesTags: [{ type: "Category" }],
     }),
     getCategory: builder.query<CategoryList, void>({
       query: () => ({
         url: "category",
         method: "GET",
       }),
+      providesTags: [{ type: "Category" }],
     }),
     deleteCategory: builder.mutation<DeleteRes, string>({
       query: (id) => ({
         url: `category/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: [{ type: "Category" }],
     }),
   }),
 });
@@ -30,4 +33,4 @@ export const {
   usePostCategoryMutation,
   useGetCategoryQuery,
   useDeleteCategoryMutation,
-} = category;
+} = categoryApi;

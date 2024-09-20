@@ -3,8 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { usePostCategoryMutation } from "@/services/categoryApi";
-
-import { CategoryRes } from "./types";
+import { CategoryRes } from "@/services/categoryApi/types";
 
 export const CategoryForm = () => {
   const {

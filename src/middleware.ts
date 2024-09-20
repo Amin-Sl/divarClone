@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
   const refreshToken = cookies().get("refreshToken");
   const accessToken = cookies().get("accessToken");
-  const refreshToken = cookies().get("refreshToken");
 
   const protectedPaths = ["/dashboard", "/admin", "/awe"];
 
@@ -16,13 +15,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-<<<<<<< HEAD
-  if (protectedPaths.includes(pathname) && !refreshToken) {
-    const url = new URL("/login", request.url);
-=======
   if (pathname === "/login" && (refreshToken || accessToken)) {
     const url = new URL("/dashboard", request.url);
->>>>>>> main
     return NextResponse.redirect(url);
   }
 }
