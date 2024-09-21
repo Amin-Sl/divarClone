@@ -9,7 +9,7 @@ import {
 } from "@/services/categoryApi";
 import { CategoryPayload } from "@/services/categoryApi/types";
 
-const CategoryList = () => {
+export const CategoryList = () => {
   const { data, isLoading } = useGetCategoryQuery();
   const [deleteCategory] = useDeleteCategoryMutation();
 
@@ -51,7 +51,7 @@ const CategoryList = () => {
                 className="bg-white text-red-600"
                 onClick={() => handleDelete(_id)}
               >
-                <Image src={`${"delete"}.svg`} />
+                <Image src="/delete.svg" />
               </Button>
             </span>
           </div>
@@ -60,5 +60,3 @@ const CategoryList = () => {
     </div>
   );
 };
-
-export default CategoryList;

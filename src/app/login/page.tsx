@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
-
 import { CheckOtpForm } from "@/components/CheckOtpForm";
 import { SendOtpForm } from "@/components/SendOtpForm";
 

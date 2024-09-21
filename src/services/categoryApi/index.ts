@@ -4,7 +4,7 @@ import { CategoryList, CategoryRes, DeleteRes } from "./types";
 
 export const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    postCategory: builder.mutation<void, CategoryRes>({
+    createCategory: builder.mutation<void, CategoryRes>({
       query: ({ name, icon, slug }) => ({
         url: "category",
         method: "POST",
@@ -30,7 +30,7 @@ export const categoryApi = baseApi.injectEndpoints({
 });
 
 export const {
-  usePostCategoryMutation,
+  useCreateCategoryMutation,
   useGetCategoryQuery,
   useDeleteCategoryMutation,
 } = categoryApi;

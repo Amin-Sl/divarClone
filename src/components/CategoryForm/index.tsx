@@ -2,7 +2,7 @@ import { Button, Input } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import { usePostCategoryMutation } from "@/services/categoryApi";
+import { useCreateCategoryMutation } from "@/services/categoryApi";
 import { CategoryRes } from "@/services/categoryApi/types";
 
 export const CategoryForm = () => {
@@ -13,11 +13,11 @@ export const CategoryForm = () => {
     formState: { errors },
   } = useForm<CategoryRes>();
 
-  const [postCategory, { isLoading }] = usePostCategoryMutation();
+  const [createCategory, { isLoading }] = useCreateCategoryMutation();
 
   const onSubmit: SubmitHandler<CategoryRes> = async (data) => {
     try {
-      await postCategory(data).unwrap();
+      await createCategory(data).unwrap();
       toast.success("اضافه شد");
       reset();
     } catch (error) {
@@ -33,51 +33,40 @@ export const CategoryForm = () => {
         </h1>
 
         <div className="mb-6">
-          <label htmlFor="name" className="mb-1 block text-sm font-medium">
-            اسم دسته بندی
-          </label>
           <Input
-            id="name"
             {...register("name", { required: "اسم دسته بندی ضروری است" })}
-            aria-label="اسم دسته بندی"
-            placeholder="اسم دسته بندی"
+            label="اسم دسته بندی"
             fullWidth
-            className={`rounded-md border p-2 ${errors.name ? "border-red-500" : "border-gray-300"}`}
+            className="rounded-md border p-2"
+            isInvalid={!!errors.name}
           />
         </div>
 
         <div className="mb-6">
-          <label htmlFor="slug" className="mb-1 block text-sm font-medium">
-            اسلاگ
-          </label>
           <Input
-            id="slug"
             {...register("slug", { required: "اسلاگ ضروری است" })}
-            aria-label="اسلاگ"
-            placeholder="اسلاگ"
+            label="اسلاگ"
             fullWidth
-            className={`rounded-md border p-2 ${errors.slug ? "border-red-500" : "border-gray-300"}`}
+            className="rounded-md border p-2"
+            isInvalid={!!errors.slug}
           />
         </div>
 
         <div className="mb-6">
-          <label htmlFor="icon" className="mb-1 block text-sm font-medium">
-            آیکون
-          </label>
           <Input
-            id="icon"
             {...register("icon", { required: "آیکون ضروری است" })}
-            aria-label="آیکون"
-            placeholder="آیکون"
+            label="آیکون"
             fullWidth
-            className={`rounded-md border p-2 ${errors.icon ? "border-red-500" : "border-gray-300"}`}
+            className="rounded-md border p-2"
+            isInvalid={!!errors.icon}
           />
         </div>
 
         <Button
           type="submit"
           isLoading={isLoading}
-          className={`w-full rounded-md py-2 text-white ${isLoading ? "cursor-not-allowed bg-gray-400" : "bg-[#a62626] hover:bg-[#8d1f1f]"}`}
+          className={`w-full rounded-md bg-[#a62626] py-2 text-white hover:bg-[#8d1f1f] disabled:cursor-not-allowed disabled:bg-gray-400`}
+          disabled={isLoading}
         >
           {isLoading ? "در حال ارسال..." : "ایجاد"}
         </Button>
