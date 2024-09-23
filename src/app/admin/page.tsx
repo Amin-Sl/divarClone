@@ -5,6 +5,8 @@ import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Oval } from "react-loader-spinner";
 
+import { CategoryForm } from "@/components/CategoryForm";
+import { CategoryList } from "@/components/CategoryList";
 import { useWhoAmIQuery } from "@/services/authApi";
 import { getCookie } from "@/utils/cookie";
 
@@ -40,5 +42,10 @@ export default function WhoAmIPage() {
       </div>
     );
 
-  return <div>Admin</div>;
+  return (
+    <>
+      <CategoryForm />
+      <CategoryList />
+    </>
+  );
 }

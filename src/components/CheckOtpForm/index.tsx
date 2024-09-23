@@ -29,8 +29,8 @@ export const CheckOtpForm = () => {
       }).unwrap();
 
       setTokens(accessToken, refreshToken);
-      push("/dashboard");
       toast.success("ورود موفقیت آمیز بود");
+      push("/dashboard");
     } catch (err) {
       toast.error("خطایی در کد تأیید رخ داد.");
     }
